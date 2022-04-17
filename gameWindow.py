@@ -31,6 +31,19 @@ class gameWindow:
 
       self.bird.set_y_pos(self.bird.get_y_pos() + self.G * self.acceleration)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
       ###
       for event in pg.event.get():
         if event.type == pg.QUIT:
