@@ -1,8 +1,8 @@
 import pygame as pg
 from Bird import FlappyBird
+from pipe import pipe
 
 class gameWindow:
-  G = 9.81
   def __init__(self, window_title='Flappy Bird'):
     #setup attributes
     self.background_image = pg.image.load("Images/background.png")
@@ -25,40 +25,39 @@ class gameWindow:
 
     while self.running:
       self.screen.blit(self.background_image, (0, 0))
-      self.acceleration += 0.0001
+      self.acceleration += 0.01
 
       ###
 
-      self.bird.set_y_pos(self.bird.get_y_pos() + self.G * self.acceleration)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      self.bird.set_y_pos(self.bird.get_y_pos() + self.acceleration)
+      for p in self.pipes:
+        p.set_x_pos(p.get_x_pos()-0.1)
       ###
       for event in pg.event.get():
         if event.type == pg.QUIT:
           self.unset_running()
         if event.type == pg.KEYDOWN:
           if event.key == pg.K_SPACE:
-            self.acceleration = -0.06
+            self.acceleration = -1.6
       self.redraw_window()
 
   def init_objects(self):
     self.bird = FlappyBird(0.5 * self.height - 20)
+    width = self.background_image.get_width() - 100
 
+    #init pipes
+    self.pipes = [
+      pipe(int(self.background_image.get_width() * 0.6), -500, True),
+      pipe(int(self.background_image.get_width()*1.2), -30, True),
+      pipe(int(self.background_image.get_width() * 1.8), -30, True),
+      pipe(int(self.background_image.get_width() * 2.4), -30, True)
+    ]
   def redraw_window(self):
     self.screen.blit(self.background_image, (0, 0))
     self.bird.draw_Bird(self.screen)
+
+    for p in self.pipes:
+      p.draw_pipe(self.screen)
     pg.display.update()
 
   def set_running(self):
