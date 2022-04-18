@@ -31,7 +31,7 @@ class gameWindow:
 
       self.bird.set_y_pos(self.bird.get_y_pos() + self.acceleration)
       for p in self.pipes:
-        p.set_x_pos(p.get_x_pos()-0.1)
+        p.set_x_pos(p.get_x_pos()-0.15) #move the pipes to the left
       ###
       for event in pg.event.get():
         if event.type == pg.QUIT:
@@ -40,17 +40,22 @@ class gameWindow:
           if event.key == pg.K_SPACE:
             self.acceleration = -1.6
       self.redraw_window()
+      self.clock.tick(300)
 
   def init_objects(self):
     self.bird = FlappyBird(0.5 * self.height - 20)
-    width = self.background_image.get_width() - 100
 
     #init pipes
     self.pipes = [
       pipe(int(self.background_image.get_width() * 0.6), -500, True),
-      pipe(int(self.background_image.get_width()*1.2), -30, True),
-      pipe(int(self.background_image.get_width() * 1.8), -30, True),
-      pipe(int(self.background_image.get_width() * 2.4), -30, True)
+      pipe(int(self.background_image.get_width()*1.0), -400, True),
+      pipe(int(self.background_image.get_width() * 1.4), -450, True),
+      pipe(int(self.background_image.get_width() * 1.8), -700, True),
+
+      pipe(int(self.background_image.get_width() * 0.6), 600, False),
+      pipe(int(self.background_image.get_width() * 1.0), 700, False),
+      pipe(int(self.background_image.get_width() * 1.4), 600, False),
+      pipe(int(self.background_image.get_width() * 1.8), 350, False)
     ]
   def redraw_window(self):
     self.screen.blit(self.background_image, (0, 0))
