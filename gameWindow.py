@@ -1,6 +1,7 @@
 import pygame as pg
 from Bird import FlappyBird
 from pipe import pipe
+pg.init()
 
 class gameWindow:
   def __init__(self, window_title='Flappy Bird'):
@@ -14,6 +15,7 @@ class gameWindow:
     self.acceleration = 0
 
     #setup gamewindow stuff
+
     pg.display.set_caption(window_title)
     self.screen = pg.display.set_mode((self.width, self.height))
     self.screen.fill(self.background_colour)
@@ -58,7 +60,7 @@ class gameWindow:
       pipe(int(self.background_image.get_width() * 1.8), 350, False)
     ]
   def redraw_window(self):
-    self.screen.blit(self.background_image, (0, 0))
+    #self.screen.blit(self.background_image, (0, 0))
     self.bird.draw_Bird(self.screen)
 
     for p in self.pipes:

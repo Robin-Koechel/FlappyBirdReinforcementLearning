@@ -1,10 +1,11 @@
 import pygame as pg
+pg.init()
 class pipe:
     def __init__(self, pos_x, pos_y, is_top=True):
         if is_top:
-            self.img_pipe = pg.image.load("Images/full pipe top.png")
+            self.img_pipe = pg.image.load("Images/full pipe top.png").convert()
         else:
-            self.img_pipe = pg.image.load("Images/full pipe bottom.png")
+            self.img_pipe = pg.image.load("Images/full pipe bottom.png").convert()
         self.x_pos = pos_x
         self.y_pos = pos_y
         self.hitbox = (self.x_pos, self.y_pos, self.img_pipe.get_width(), self.img_pipe.get_height())
